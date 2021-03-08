@@ -3,31 +3,20 @@
 
 using namespace std;
 
-int returnMin(char grade, int s, int g, int p, int d)
-{
-	cout << grade << endl;
-	if(grade >= 'A' && grade <= 'Z') grade+=('a'-'A');
-	if(grade == 'b')
+<<<<<<< HEAD
+=======
+class ResultData{
+	int sum;
+	int cost;
+public:
+	ResultData(int sum, int cost)
 	{
-		return 0;
+		this->sum = sum;
+		this->cost = cost;
 	}
-	else if(grade == 's')
-	{
-		return s;
-	}
-	else if(grade == 'g')
-	{
-		return g;
-	}
-	else if(grade == 'p')
-	{
-		return p;
-	}
-	else
-	{
-		return d;
-	}
-}
+	int getSum(){return sum;}
+	int getCost(){return cost;}
+};
 
 int returnMax(char grade, int s, int g, int p, int d)
 {
@@ -61,6 +50,7 @@ int main()
 	int n, s, g, p, d;
 	vector<char> grade;
 	vector<int> result;
+	
 	cin >> n >> s >> g >> p >> d;
 	getchar();
 	for(int i=0;i<n;++i)
