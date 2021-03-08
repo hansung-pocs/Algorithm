@@ -8,20 +8,19 @@ int n,s,g,p,d;
 
 int returnMin(char grade)
 {
-	if(grade >= 'A' && grade <= 'Z') grade+=('a'-'A');
-	if(grade == 'b')
+	if(grade == 'B')
 	{
 		return 0;
 	}
-	else if(grade == 's')
+	else if(grade == 'S')
 	{
 		return s;
 	}
-	else if(grade == 'g')
+	else if(grade == 'G')
 	{
 		return g;
 	}
-	else if(grade == 'p')
+	else if(grade == 'P')
 	{
 		return p;
 	}
@@ -34,20 +33,19 @@ int returnMin(char grade)
 
 int returnMax(char grade)
 {
-	if(grade >= 'A' && grade <= 'Z') grade+=('a'-'A');
-	if(grade == 'b')
+	if(grade == 'B')
 	{
 		return s-1;
 	}
-	else if(grade == 's')
+	else if(grade == 'S')
 	{
 		return g-1;
 	}
-	else if(grade == 'g')
+	else if(grade == 'G')
 	{
 		return p-1;
 	}
-	else if(grade == 'p')
+	else if(grade == 'P')
 	{
 		return d-1;
 	}
@@ -60,35 +58,36 @@ int returnMax(char grade)
 
 int main()
 {
-	vector<char> grade;
 	vector<int> result;
-	string str;
+	string grade;
 
 	cin >> n >> s >> g >> p >> d;
-	cin >> str;
-	for(char & ch : str)
-	{
-		grade.push_back(ch);
-	}
+	cin >> grade;
 	for(int i=0;i<n;++i)
 	{
 		if(i==0)
 		{
-			int cost = returnMax(grade[i]);
-			if(returnMax(grade[i]) == d*2)
+			int cost;
+
+			if(grade[i] == 'D')
 				cost = d;
-			result.push_back(returnMax(grade[i]));
+			else
+				cost = returnMax(grade[i]);
+
+			result.push_back(cost);
 		}
 		else
 		{
-			int cost = returnMax(grade[i]) - result[i-1];
-			if(returnMax(grade[i]) == d*2)
+			int cost;
+
+			if(grade[i] == 'D')
 				cost = d;
-			if(cost>=0)
-				result.push_back(cost);
+
+			else if(result[i-1] <= returnMax(grade[i]))
+				cost = returnMax(grade[i]) - result[i-1];
 			else
 			{
-				result.push_back(0);
+				cost = 0;
 				result[i-1] = returnMax(grade[i]);
 				for(int j=i-1;j>0;--j)
 				{
@@ -103,11 +102,14 @@ int main()
 					else break;
 				}
 			}
+			result.push_back(cost);
 		}
 	}
 	int sum = 0;
-	for(int i=0;i<n;++i)
-		sum += result[i];
+	for(int & i : result)
+	{
+		sum+=i;
+	}
 	cout << sum;
 
 	return 0;
