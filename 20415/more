@@ -1,0 +1,2 @@
+g++ -c -o main.o main.cpp
+makefile:5: recipe for target 'main.o' failed
