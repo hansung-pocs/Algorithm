@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -61,12 +62,13 @@ int main()
 {
 	vector<char> grade;
 	vector<int> result;
-	
+	string str;
+
 	cin >> n >> s >> g >> p >> d;
-	getchar();
-	for(int i=0;i<n;++i)
+	cin >> str;
+	for(char & ch : str)
 	{
-		grade.push_back(getchar());
+		grade.push_back(ch);
 	}
 	for(int i=0;i<n;++i)
 	{
