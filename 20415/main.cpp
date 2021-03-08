@@ -74,6 +74,9 @@ int main()
 	{
 		if(i==0)
 		{
+			int cost = returnMax(grade[i]);
+			if(returnMax(grade[i]) == d*2)
+				cost = d;
 			result.push_back(returnMax(grade[i]));
 		}
 		else
