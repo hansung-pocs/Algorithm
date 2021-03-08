@@ -1,6 +1,0 @@
-﻿  main.cpp
-c:\users\nayec\desktop\2020final\project\baekjoon\1010\main.cpp(16): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1274): note: 'scanf' 선언을 참조하십시오.
-c:\users\nayec\desktop\2020final\project\baekjoon\1010\main.cpp(19): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1274): note: 'scanf' 선언을 참조하십시오.
-  1010.vcxproj -> C:\Users\nayec\Desktop\2020final\Project\baekjoon\Debug\1010.exe

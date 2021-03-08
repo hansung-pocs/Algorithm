@@ -1,6 +1,0 @@
-﻿  main.cpp
-d:\algorithm\algorithm_2020\11279\main.cpp(53): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1274): note: 'scanf' 선언을 참조하십시오.
-d:\algorithm\algorithm_2020\11279\main.cpp(59): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1274): note: 'scanf' 선언을 참조하십시오.
-  11279.vcxproj -> D:\algorithm\algorithm_2020\x64\Debug\11279.exe
