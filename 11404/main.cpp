@@ -20,41 +20,53 @@ int main()
             if(e.first == b-1 && e.second > c)
             {
                 e = {b-1, c};
+                dist[a-1][b-1] = c;
                 isFound = true;
             }
         }
-        if(!isFound) graph[a-1].push_back({b-1, c});
+        if(!isFound) 
+        {
+            graph[a-1].push_back({b-1, c});
+            dist[a-1][b-1] = c;
+        }
     }
 
     for(int i=0;i<n;++i)
     {
         dist[i][i] = 0;
-        vector<int> visitTarget, nextVisitTarget;
+    }
+
+    for(int i=0;i<n;++i)
+    {
+
+        int currentIndex = i;
         vector<bool> visited = vector<bool>(n, false);
-        
-        visitTarget.push_back(i);
 
         while(true)
         {
-            for(int & e : visitTarget)
+            visited[currentIndex] = true;
+            int target = -1;
+            for(auto & e : graph[currentIndex])
             {
-                if(visited[e]) continue;
-                visited[e] = true;
-                for(auto & e2 : graph[e])
+                if(visited[e.first]) continue;
+                if(dist[i][e.first] == -1 || dist[i][e.first] > dist[i][currentIndex] + e.second)
                 {
-                    int newDist = dist[i][e] + e2.second;
-                    if(dist[i][e2.first] == -1 || dist[i][e2.first] > newDist)
-                    {
-                        dist[i][e2.first] = newDist;
-                    }
-                    nextVisitTarget.push_back(e2.first);
+                    dist[i][e.first] = dist[i][currentIndex] + e.second;
                 }
             }
 
-            visitTarget = nextVisitTarget;
-            if(visitTarget.empty()) break;
-            nextVisitTarget.clear();
-        }        
+            for(int j=0;j<n;++j)
+            {
+                if(visited[j] || dist[i][j] == -1 ) continue;
+                if(target == -1 || dist[i][j] < dist[i][target])
+                {
+                    target = j;
+                }
+            }
+
+            if(target == -1) break;
+            currentIndex = target;
+        }
     }
 
     for(int i=0;i<n;++i)
