@@ -1,49 +1,68 @@
 #include <iostream>
 #include <vector>
+#include <tuple>
 
 using namespace std;
 
-void dfs(
+void bfs(
     vector<vector<int>> & data, 
     vector<vector<vector<int>>> & map,
     vector<vector<vector<bool>>> & visit,
-    int i, int j, int k, 
+    int startK,
     int n, int m
 )
 {
-    int dx[] = {i+1, i-1, i, i};
-    int dy[] = {j, j, j+1, j-1};
+    int dx[] = {1, -1, 0, 0};
+    int dy[] = {0, 0, 1, -1};
 
-    visit[i][j][k] = true;
+    vector<tuple<int, int, int>> _queue, nextQueue;
 
-    for(int dir=0; dir<4; ++dir)
+    _queue.push_back({0, 0, startK});
+    visit[0][0][startK] = true;
+
+    while(true)
     {
-        if(0 <= dx[dir] && dx[dir] < n && 0 <= dy[dir] && dy[dir] < m)
+        for(auto & e : _queue)
         {
-            if(data[dx[dir]][dy[dir]] == 1)
+            if(get<0>(e) == n-1 && get<1>(e) == m-1)
             {
-                if(k == 0 && !visit[dx[dir]][dy[dir]][k+1])
+                return;
+            }
+            
+            for(int dir=0; dir<4; ++dir)
+            {
+                if(0 <= get<0>(e)+dx[dir] && get<0>(e)+dx[dir] < n && 0 <= get<1>(e)+dy[dir] && get<1>(e)+dy[dir] < m)
                 {
-                    map[dx[dir]][dy[dir]][k+1] = map[dx[dir]][dy[dir]][k]+1;
-                    dfs(data, map, visit, dx[dir], dy[dir], k+1, n, m);
+                    if(data[get<0>(e)+dx[dir]][get<1>(e)+dy[dir]] == 1)
+                    {
+                        if(get<2>(e) == 0 && !visit[get<0>(e)+dx[dir]][get<1>(e)+dy[dir]][get<2>(e)+1])
+                        {
+                            visit[get<0>(e)+dx[dir]][get<1>(e)+dy[dir]][get<2>(e)+1] = true;
+                            map[get<0>(e)+dx[dir]][get<1>(e)+dy[dir]][get<2>(e)+1] = map[get<0>(e)][get<1>(e)][get<2>(e)]+1;
+                            nextQueue.push_back({get<0>(e)+dx[dir], get<1>(e)+dy[dir], get<2>(e)+1});
+                        }
+                    }
+                    else if(!visit[get<0>(e)+dx[dir]][get<1>(e)+dy[dir]][get<2>(e)]) 
+                    {
+                        visit[get<0>(e)+dx[dir]][get<1>(e)+dy[dir]][get<2>(e)] = true;
+                        map[get<0>(e)+dx[dir]][get<1>(e)+dy[dir]][get<2>(e)] = map[get<0>(e)][get<1>(e)][get<2>(e)]+1;
+                        nextQueue.push_back({get<0>(e)+dx[dir], get<1>(e)+dy[dir], get<2>(e)});
+                    }
                 }
             }
-            else if(!visit[dx[dir]][dy[dir]][k]) 
-            {
-                map[dx[dir]][dy[dir]][k] = map[dx[dir]][dy[dir]][k]+1;
-                dfs(data, map, visit, dx[dir], dy[dir], k, n, m);
-            }
         }
+        if(nextQueue.empty()) break;
 
+        _queue = nextQueue;
+        nextQueue.clear();
     }
-    
-    visit[i][j][k] = false;
 }
 
 int main()
 {
     int n, m;
     scanf("%d %d",&n, &m);
+    getchar();
 
     vector<vector<int>> arr = vector<vector<int>>(n, vector<int>());
 
@@ -72,21 +91,32 @@ int main()
         for(int j=0;j<m;++j)
         {
             char ch;
-            scanf("%c",&ch);
-            arr[i].push_back(ch);
+            ch = getchar();
+            arr[i].push_back((int)(ch-'0'));
         }
         getchar();
     }
 
-    dist[0][0][0] = 0;
-    dfs(arr, dist, visit, 0, 0, 0, n, m);
+    if(arr[0][0] == 1)
+    {
+        dist[0][0][1] = 1;
+        bfs(arr, dist, visit, 1, n, m);
+    }
+    else
+    {
+        dist[0][0][0] = 1;
+        bfs(arr, dist, visit, 0, n, m);
+    }
+    
 
     int result, resultA, resultB;
 
     resultA = dist[n-1][m-1][0];
     resultB = dist[n-1][m-1][1];
 
-    if(resultB == -1 || resultA < resultB) result = resultA;
+    if(resultA == -1) result = resultB;
+    else if(resultB == -1) result = resultA;
+    else if(resultA<resultB) result = resultA;
     else result = resultB;
     
     printf("%d",result);
