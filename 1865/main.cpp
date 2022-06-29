@@ -2,14 +2,17 @@
 #include <vector>
 #include <tuple>
 
+
 using namespace std;
+
+constexpr int INF = 99999999;
 
 bool relaxation(
     vector<int> & dist, vector<tuple<int, int, int>> & nodes)
 {
     bool updated = false;
 
-    vector<int> newDist = dist;
+    vector<int> newDist = vector<int>(dist);
 
     for(auto & node : nodes)
     {
@@ -17,11 +20,10 @@ bool relaxation(
         int endNodeDist = dist[get<1>(node)];
         int cost = get<2>(node);
 
-        if(startNodeDist == -999999) continue;
-
-        if(startNodeDist + cost <= endNodeDist || endNodeDist == -999999)
+        if(startNodeDist + cost < endNodeDist)
         {
             updated = true;
+
             newDist[get<1>(node)] = startNodeDist + cost;
         }
     }
@@ -41,7 +43,7 @@ int main()
         int n, m, w;
         scanf("%d %d %d",&n,&m,&w);
 
-        vector<int> dist = vector<int>(n, -999999);
+        vector<int> dist = vector<int>(n, INF);
         dist[0] = 0;
 
         vector<tuple<int, int, int>> nodes;
@@ -60,9 +62,11 @@ int main()
             nodes.push_back({s-1,e-1,-t});
         }
 
-        for(int j=0;j<n-1;++j) relaxation(dist, nodes);
-        bool result = !relaxation(dist, nodes);
-
+        for(int j=0;j<n-1;++j) 
+        {
+            relaxation(dist, nodes);
+        }
+        bool result = relaxation(dist, nodes);
         printf("%s\n",result?"YES":"NO");
     }
     return 0;
