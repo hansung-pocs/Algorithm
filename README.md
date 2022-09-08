@@ -13,3 +13,5 @@
 7. Review 및 Comment에는 경어체, 평어체 아무거나 사용해도 되나, 욕설과 비속어는 금지<br> 왜? Repository가 Private가 아니라 Public임 일반 사람들도 볼 수 있음.
 8. 다른이의 폴더를 참고하여 볼 수 있으나 허락없이 수정하지 말 것
 9. Branch Protection을 사용하여, Reviewer n명 이상에게 Approve를 받지 못하면 Merge가 안됨 (n명은 추후 수정)
+
+다른 git(GitHub) 사용법은 각자 공부하다가 힘든 부분있으면 디스코드 또는 단톡방에 물어보시면 됩니다.
