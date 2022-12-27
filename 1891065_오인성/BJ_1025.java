@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main {
+public class BJ_1025 {
 
 	static int N, M;
 	static int[][] array;
@@ -26,7 +26,7 @@ public class Main {
 			for (int j = 0; j < M; ++j) {
 				array[i][j] = arr[i].charAt(j) - '0';
 			}
-		}
+		} // 입력부분
 
 		for (int i = 0; i < N; ++i) { 
 			for (int j = 0; j < M; ++j) { 
@@ -44,7 +44,7 @@ public class Main {
 			for (int j = -M; j < M; ++j) {
 
 				if (i == 0 && j == 0)
-					continue;
+					continue; 
 
 				int x = c; 
 				int y = r; 
