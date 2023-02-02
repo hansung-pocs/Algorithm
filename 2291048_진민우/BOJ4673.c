@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-int self_number(int n)
+int not_self_number(int n)
 {
     int num = n;
     int sum = n;
-    int r = 0;
+    int r;
 
     while(num > 0){
         r = num % 10;
@@ -17,19 +17,15 @@ int self_number(int n)
 int main(void)
 {
     int a[10001] = {0};
-    int num;
+    int result;
 
     for(int i = 1; i < 10001; i++){
-        num = self_number(i);
-        if(num < 10001){
-            a[num] = num;
+        result = not_self_number(i);
+        if(result < 10001){
+            a[result] = result;
         }
-    }
-
-    for(int i = 1; i < 10001; i++){
-        if(a[i] == 0){
+        if(a[i] == 0)
             printf("%d\n", i);
-        }
     }
 
     return 0;
