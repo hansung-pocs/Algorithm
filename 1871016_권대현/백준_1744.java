@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
-public class Main {
+public class 백준_1744 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
